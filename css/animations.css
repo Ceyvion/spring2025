@@ -6,7 +6,7 @@
         opacity: 0.8;
     }
     50% {
-        transform: scale(1.1);
+        transform: scale(1.05);
         opacity: 1;
     }
     100% {
@@ -20,13 +20,13 @@
         transform: scale(1);
     }
     20% {
-        transform: scale(1.2);
+        transform: scale(1.1);
     }
     40% {
         transform: scale(1);
     }
     60% {
-        transform: scale(1.1);
+        transform: scale(1.05);
     }
     80% {
         transform: scale(1);
@@ -47,7 +47,7 @@
 
 @keyframes slideInRight {
     from {
-        transform: translateX(50px);
+        transform: translateX(30px);
         opacity: 0;
     }
     to {
@@ -58,7 +58,7 @@
 
 @keyframes slideInLeft {
     from {
-        transform: translateX(-50px);
+        transform: translateX(-30px);
         opacity: 0;
     }
     to {
@@ -69,7 +69,7 @@
 
 @keyframes slideInUp {
     from {
-        transform: translateY(30px);
+        transform: translateY(20px);
         opacity: 0;
     }
     to {
@@ -89,56 +89,84 @@
 
 @keyframes colorPulse {
     0% {
-        box-shadow: 0 0 10px 2px var(--purple);
+        box-shadow: 0 0 15px 2px var(--indigo);
     }
     33% {
-        box-shadow: 0 0 10px 2px var(--orange);
+        box-shadow: 0 0 15px 2px var(--terracotta);
     }
     66% {
-        box-shadow: 0 0 10px 2px var(--teal);
+        box-shadow: 0 0 15px 2px var(--teal);
     }
     100% {
-        box-shadow: 0 0 10px 2px var(--purple);
+        box-shadow: 0 0 15px 2px var(--indigo);
+    }
+}
+
+@keyframes subtleBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes glowFade {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
     }
 }
 
 /* Element Animations */
 
-/* Title Slide Animations */
-.title-slide h1 {
-    animation: slideInLeft 1s ease-out 0.5s both;
+/* Title Section Animations */
+.title-section h1 {
+    animation: slideInLeft 1.2s ease-out 0.5s both;
 }
 
-.title-slide h2 {
-    animation: slideInRight 1s ease-out 0.8s both;
+.title-section h2 {
+    animation: slideInRight 1.2s ease-out 0.8s both;
 }
 
-.title-slide h3 {
-    animation: slideInUp 1s ease-out 1.1s both;
+.title-section h3 {
+    animation: slideInUp 1.2s ease-out 1.1s both;
 }
 
 .rhythm-circle {
-    animation: pulse 4s infinite ease-in-out, colorPulse 10s infinite linear;
+    animation: pulse 6s infinite ease-in-out, colorPulse 10s infinite linear;
 }
 
-/* Strategy Wheel Animations */
-.strategy-node {
+/* Initiative Navigation Animations */
+.initiative-nav-item {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.strategy-node:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.3);
+.initiative-nav-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.1);
     cursor: pointer;
 }
 
-.strategy-number {
-    animation: beat 2s infinite;
+.initiative-number {
+    animation: beat 3s infinite;
     animation-play-state: paused;
 }
 
-.visible .strategy-number {
+.visible .initiative-number {
     animation-play-state: running;
+}
+
+/* Heritage section animations */
+.heritage-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.heritage-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 /* Results Bar Animation */
@@ -167,16 +195,16 @@
     transition: transform 0.8s cubic-bezier(0.26, 0.86, 0.44, 0.985), opacity 0.8s cubic-bezier(0.26, 0.86, 0.44, 0.985);
 }
 
-/* Strategy Comparison Animation */
-.strategy-comparison .current-plan {
+/* Initiative Content Animation */
+.initiative-content .initiative-context {
     animation: slideInLeft 0.8s ease-out 0.2s both;
 }
 
-.strategy-comparison .enhanced-plan {
+.initiative-content .initiative-vision {
     animation: slideInRight 0.8s ease-out 0.4s both;
 }
 
-.inspiration {
+.cultural-insight {
     animation: fadeIn 1s ease-out 0.6s both;
 }
 
@@ -207,8 +235,8 @@
 /* Metrics Animation */
 .metric-item {
     opacity: 0;
-    transform: scale(0.9);
-    transition: opacity 0.5s ease, transform 0.5s ease, background-color 0.3s ease;
+    transform: scale(0.95);
+    transition: opacity 0.7s ease, transform 0.7s ease, background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .metric-item.visible {
@@ -216,11 +244,20 @@
     transform: scale(1);
 }
 
+.metric-icon {
+    animation: subtleBounce 3s infinite ease-in-out;
+    animation-play-state: paused;
+}
+
+.metric-item:hover .metric-icon {
+    animation-play-state: running;
+}
+
 /* Quote Animation */
 blockquote {
     opacity: 0;
-    transform: scale(0.95);
-    transition: opacity 1s ease, transform 1s ease;
+    transform: scale(0.98);
+    transition: opacity 1.2s ease, transform 1.2s ease;
 }
 
 blockquote.visible {
@@ -230,7 +267,7 @@ blockquote.visible {
 
 cite {
     opacity: 0;
-    transition: opacity 0.5s ease 1s;
+    transition: opacity 0.7s ease 1.2s;
 }
 
 cite.visible {
@@ -240,11 +277,28 @@ cite.visible {
 /* Final CTA Animation */
 .final-cta {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transform: translateY(15px);
+    transition: opacity 1s ease, transform 1s ease, box-shadow 0.3s ease;
 }
 
 .final-cta.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+.final-cta:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Back to top button animation */
+.back-to-top {
+    transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+}
+
+@media (prefers-reduced-motion) {
+    /* For users who prefer reduced motion */
+    * {
+        animation-duration: 0.001s !important;
+        transition-duration: 0.001s !important;
+    }
 }
