@@ -1,17 +1,21 @@
 :root {
     /* Color Palette - Refined Afrocentric palette */
-    --indigo: #2C3E50;       /* Deep indigo - inspired by traditional indigo-dyed textiles */
-    --terracotta: #D35400;   /* Rich terracotta - earthen tones from African landscapes */
+    --indigo: #34495e;       /* Lighter indigo for better contrast */
+    --indigo-dark: #2C3E50;  /* Original indigo for accents */
+    --terracotta: #E74C3C;   /* Brighter terracotta for better visibility */
     --gold: #F1C40F;         /* Gold/brass - representing cultural richness */
-    --ochre: #E67E22;        /* Supporting ochre tone */
-    --teal: #16A085;         /* Deep teal - supporting tone */
-    --charcoal: #333333;     /* Warm charcoal - base dark */
-    --ivory: #F9F6F0;        /* Ivory - base light */
+    --ochre: #F39C12;        /* Brighter ochre for better contrast */
+    --teal: #1ABC9C;         /* Brighter teal for better visibility */
+    --charcoal: #3a3a3a;     /* Slightly lighter charcoal */
+    --dark-gray: #4a4a4a;    /* Additional gray for backgrounds */
+    --medium-gray: #777777;  /* Medium gray for subtle elements */
+    --light-gray: #ecf0f1;   /* Light gray for backgrounds */
+    --ivory: #FFFFFF;        /* Pure white for better contrast on dark backgrounds */
     
     /* Typography - Swiss-inspired with cultural sensitivity */
-    --display-font: 'Playfair Display', serif;
-    --heading-font: 'Work Sans', sans-serif;
-    --body-font: 'Quattrocento Sans', sans-serif;
+    --display-font: 'Playfair Display', Georgia, serif;
+    --heading-font: 'Work Sans', Helvetica, Arial, sans-serif;
+    --body-font: 'Quattrocento Sans', 'Open Sans', Arial, sans-serif;
     
     /* Spacing System - Music-inspired rhythm */
     --rhythm-unit: 8px;      /* Base unit (eighth note) */
@@ -34,13 +38,13 @@ html {
 }
 
 body {
-    background-color: var(--charcoal);
-    color: var(--ivory);
+    background-color: var(--light-gray);
+    color: var(--dark-gray);
     font-family: var(--body-font);
     margin: 0;
     padding: 0;
-    line-height: 1.5;
-    font-size: 16px;
+    line-height: 1.6;
+    font-size: 18px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -51,6 +55,8 @@ body {
     margin: 0 auto;
     padding: 0;
     overflow-x: hidden;
+    background-color: white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -174,25 +180,30 @@ strong {
 
 /* Sections */
 section {
-    padding: var(--rhythm-xxl) var(--rhythm-l);
+    padding: var(--rhythm-xxl) var(--rhythm-xl);
     margin-bottom: 0;
     width: 100%;
     position: relative;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 section > * {
     position: relative;
     z-index: 1;
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Title Section */
 .title-section {
     text-align: center;
-    padding: calc(var(--rhythm-xxl) * 2) var(--rhythm-l);
-    background: linear-gradient(135deg, var(--indigo), var(--charcoal));
+    padding: calc(var(--rhythm-xxl) * 1.5) var(--rhythm-xl);
+    background: linear-gradient(135deg, var(--indigo), var(--indigo-dark));
     margin-bottom: 0;
     position: relative;
     overflow: hidden;
+    color: white;
 }
 
 .title-section::after {
@@ -203,8 +214,28 @@ section > * {
     width: 100%;
     height: 100%;
     background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h100v100H0z"/><path d="M50 50c-3 0-5-2-5-5s2-5 5-5 5 2 5 5-2 5-5 5zm25 25c-3 0-5-2-5-5s2-5 5-5 5 2 5 5-2 5-5 5zm-50 0c-3 0-5-2-5-5s2-5 5-5 5 2 5 5-2 5-5 5zm25-50c-3 0-5-2-5-5s2-5 5-5 5 2 5 5-2 5-5 5z" fill="white" fill-opacity="0.05"/></svg>');
-    opacity: 0.1;
+    opacity: 0.2;
     z-index: 0;
+}
+
+.title-section h1 {
+    font-size: 4rem;
+    margin-bottom: var(--rhythm-m);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.title-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: var(--rhythm-m);
+}
+
+.title-section h2::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 4px;
+    background-color: var(--gold);
+    margin: var(--rhythm-s) auto 0;
 }
 
 .title-section h1 {
@@ -222,22 +253,22 @@ section > * {
 }
 
 .rhythm-visualization {
-    width: 140px;
-    height: 140px;
+    width: 160px;
+    height: 160px;
     position: relative;
-    margin: 0 auto var(--rhythm-l);
+    margin: 0 auto var(--rhythm-xl);
 }
 
 .rhythm-circle {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background: radial-gradient(circle, var(--gold) 0%, var(--indigo) 70%);
+    background: radial-gradient(circle, var(--gold) 0%, var(--terracotta) 70%);
     position: absolute;
     top: 0;
     left: 0;
     animation: pulse 6s infinite ease-in-out;
-    box-shadow: 0 0 30px rgba(241, 196, 15, 0.2);
+    box-shadow: 0 0 40px rgba(241, 196, 15, 0.4);
 }
 
 @keyframes pulse {
@@ -308,19 +339,44 @@ section > * {
 
 /* Initiative Sections (formerly Strategy Sections) */
 .initiative-section {
-    padding: var(--rhythm-xxl) var(--rhythm-l);
+    padding: var(--rhythm-xxl) var(--rhythm-xl);
     margin: 0;
     position: relative;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
 .initiatives-overview-section {
-    padding-bottom: var(--rhythm-m);
+    padding: var(--rhythm-xxl) var(--rhythm-xl);
     text-align: center;
+    position: relative;
 }
 
 .initiative-description {
     max-width: 70ch;
-    margin: 0 auto var(--rhythm-l);
+    margin: 0 auto var(--rhythm-xl);
+    font-size: 1.2rem;
+    line-height: 1.8;
+}
+
+/* Initiative headers */
+.initiative-header {
+    text-align: center;
+    margin-bottom: var(--rhythm-xl);
+    position: relative;
+}
+
+.initiative-header h2 {
+    margin-bottom: var(--rhythm-l);
+    font-size: 2.5rem;
+}
+
+.initiative-header h2::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background-color: var(--gold);
+    margin: var(--rhythm-s) auto 0;
 }
 
 @media (max-width: 768px) {
@@ -558,10 +614,17 @@ section > * {
 
 .timeline-phase {
     width: 22%;
-    background-color: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
-    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    padding: var(--rhythm-l);
     position: relative;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.timeline-phase:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
 }
 
 .timeline-phase::before {
@@ -570,21 +633,36 @@ section > * {
     top: -10px;
     left: 50%;
     transform: translateX(-50%);
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
-    background-color: var(--yellow);
+    background-color: var(--gold);
+    box-shadow: 0 0 0 4px rgba(241, 196, 15, 0.3);
 }
 
 .timeline-duration {
     font-style: italic;
-    color: var(--yellow);
-    margin-bottom: 15px;
+    color: var(--terracotta);
+    margin-bottom: var(--rhythm-m);
+    font-weight: 600;
+}
+
+.timeline-phase h3 {
+    color: var(--indigo);
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: var(--rhythm-s);
+    margin-bottom: var(--rhythm-m);
 }
 
 .timeline-tasks {
-    padding-left: 15px;
+    padding-left: var(--rhythm-m);
     margin-left: 0;
+    color: var(--dark-gray);
+}
+
+.roadmap-section {
+    background-color: var(--light-gray);
+    position: relative;
 }
 
 /* Results Section */
@@ -603,16 +681,36 @@ section > * {
 }
 
 .result-bar {
-    height: 30px;
-    background-color: var(--orange);
+    height: 16px;
+    background: linear-gradient(to right, var(--gold), var(--terracotta));
     width: 0; /* Will be set by JS */
-    border-radius: 15px;
-    margin-bottom: 10px;
+    border-radius: 8px;
+    margin-bottom: var(--rhythm-s);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.result-item {
+    background-color: white;
+    padding: var(--rhythm-l);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin-bottom: var(--rhythm-m);
 }
 
 .result-item h3 {
-    color: var(--yellow);
-    margin-bottom: 5px;
+    color: var(--indigo);
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.result-item p {
+    color: var(--dark-gray);
+}
+
+.results-section {
+    padding-top: var(--rhythm-xxl);
+    padding-bottom: var(--rhythm-xxl);
+    position: relative;
 }
 
 /* Metrics Section */
