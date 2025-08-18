@@ -44,117 +44,93 @@ document.addEventListener('DOMContentLoaded', function() {
         plugins: []
     });
 
+    let slideTimeline = null;
+
     // Initialize the presentation
     deck.initialize().then(() => {
         // Dispatch a custom event when Reveal is ready
         window.dispatchEvent(new Event('reveal-ready'));
-        
+
         // Start animations for the first slide
-        triggerSlideAnimations(deck.getCurrentSlide());
+        slideTimeline = triggerSlideAnimations(deck.getCurrentSlide());
     });
-    
+
     // Listen for slide changes to trigger animations
     deck.addEventListener('slidechanged', function(event) {
-        // Get the current slide
-        const currentSlide = event.currentSlide;
-        
-        // Get index of current slide
-        const currentIndex = event.indexh;
-        console.log(`Current slide index: ${currentIndex}`);
-        
+        // Kill any existing timeline to avoid overlapping animations
+        if (slideTimeline) {
+            slideTimeline.kill();
+        }
+
         // Trigger animations for the current slide
-        triggerSlideAnimations(currentSlide);
+        slideTimeline = triggerSlideAnimations(event.currentSlide);
     });
-    
-    // Trigger animations for the first slide immediately
-    triggerSlideAnimations(deck.getCurrentSlide());
-    
+
     // Function to trigger animations for a slide
     function triggerSlideAnimations(slide) {
-        if (!slide) return; // Exit if slide is undefined
-        
+        if (!slide) return gsap.timeline(); // Exit if slide is undefined
+
+        const tl = gsap.timeline();
+
         // Make strategy numbers animated
         if (slide.querySelector('.strategy-number')) {
-            slide.classList.add('visible');
+            tl.call(() => slide.classList.add('visible'));
         }
-        
+
         // Animate donation tiers
         const donationTiers = slide.querySelectorAll('.donation-tier');
         if (donationTiers.length) {
-            donationTiers.forEach((tier, index) => {
-                setTimeout(() => {
-                    tier.classList.add('visible');
-                }, 200 * index);
-            });
+            tl.from(donationTiers, { x: -20, opacity: 0, stagger: 0.2 });
         }
-        
+
         // Animate influencer tiers
         const influencerTiers = slide.querySelectorAll('.influencer-tier');
         if (influencerTiers.length) {
-            influencerTiers.forEach((tier, index) => {
-                setTimeout(() => {
-                    tier.classList.add('visible');
-                }, 150 * index);
-            });
+            tl.from(influencerTiers, { y: 20, opacity: 0, stagger: 0.15 }, "<");
         }
-        
+
         // Animate timeline phases
         const timelinePhases = slide.querySelectorAll('.timeline-phase');
         if (timelinePhases.length) {
-            timelinePhases.forEach((phase, index) => {
-                setTimeout(() => {
-                    phase.classList.add('visible');
-                }, 200 * index);
-            });
+            tl.from(timelinePhases, { y: 20, opacity: 0, stagger: 0.2 }, "<");
         }
-        
+
         // Animate result bars
         const resultItems = slide.querySelectorAll('.result-item');
         if (resultItems.length) {
             resultItems.forEach((item, index) => {
-                setTimeout(() => {
-                    const bar = item.querySelector('.result-bar');
-                    const value = item.getAttribute('data-value');
-                    
-                    if (bar && value) {
-                        // Set width based on the data-value attribute (multiplied for visual effect)
-                        bar.style.width = (value * 10) + '%';
-                    }
-                }, 300 * index);
+                const bar = item.querySelector('.result-bar');
+                const value = item.getAttribute('data-value');
+
+                if (bar && value) {
+                    tl.to(bar, { width: (value * 10) + '%' }, index * 0.3);
+                }
             });
         }
-        
+
         // Animate metrics
         const metricItems = slide.querySelectorAll('.metric-item');
         if (metricItems.length) {
-            metricItems.forEach((item, index) => {
-                setTimeout(() => {
-                    item.classList.add('visible');
-                }, 100 * index);
-            });
+            tl.from(metricItems, { scale: 0.9, opacity: 0, stagger: 0.1 }, "<");
         }
-        
+
         // Animate quote
         const blockquote = slide.querySelector('blockquote');
         const cite = slide.querySelector('cite');
         if (blockquote) {
-            setTimeout(() => {
-                blockquote.classList.add('visible');
-                if (cite) {
-                    setTimeout(() => {
-                        cite.classList.add('visible');
-                    }, 500);
-                }
-            }, 300);
+            tl.from(blockquote, { opacity: 0, scale: 0.95 });
+            if (cite) {
+                tl.from(cite, { opacity: 0 }, "-=0.5");
+            }
         }
-        
+
         // Animate final CTA
         const finalCta = slide.querySelector('.final-cta');
         if (finalCta) {
-            setTimeout(() => {
-                finalCta.classList.add('visible');
-            }, 1000);
+            tl.from(finalCta, { y: 20, opacity: 0 });
         }
+
+        return tl;
     }
     
     // Handle keyboard navigation
